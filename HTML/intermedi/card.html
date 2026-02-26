@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="it">
+    <head>
+        
+    </head>
+    <meta charset="UTF-8" />
+
+    <title>Esercizio Card</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        background-color: #f0f0f0;
+        margin: 0;
+        padding: 20px;
+      }
+      
+      .container {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+      }
+      
+      .card {
+        background-color: #1e212d;
+        color: white;
+        width: 300px;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 12px 16px rgba(0, 0, 0, 0.3);
+        cursor: pointer;
+      }
+
+      .card-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+      }
+
+      .card-content {
+        padding: 16px;
+      }
+
+      .card-title {
+        margin: 0 0 8px 0;
+        font-size: 1.2rem;
+      }
+
+      .card-desc {
+        font-size: 0.9rem;
+        color: #b0b0b0;
+        margin-bottom: 16px;
+        line-height: 1.4;
+      }
+
+      .badge-container {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 16px;
+      }
+
+      .badge {
+        background-color: #374151;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 0.75rem;
+        font-weight: bold;
+      }
+
+      .btn-reserve {
+        display: block;
+        background-color: white;
+        padding: 10px;
+        text-align: center;
+        border-radius: 20px;
+        text-decoration: none;
+        font-weight: bold;
+        margin-top: 10px;
+      }
+
+      .btn-reserve:link {
+        color: black;
+      }
+
+      .btn-reserve:visited {
+        color: #555;
+      }
+
+      .btn-reserve:hover {
+        background-color: #e2e2e2;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 style="text-align: center;">Destinazioni da Sogno</h1>
+    <div class="container">
+      <article class="card">
+        <img src="Colosseo.jpg" class="card-image" />
+
+        <div class="card-content">
+          <h3 class="card-title">Colosseo</h3>
+          <p class="card-desc">
+            Villa di lusso con vista sul Colosseo,magnifica vista mozzafiato sul
+            tramonto con calice di vino.
+          </p>
+
+          <div class="badge-container">
+            <span class="badge">3 notti</span>
+          </div>
+
+          <a href="coloseo" class="btn-reserve">Prenota Ora</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="china.jpg" alt="Montagna" class="card-image" />
+        <div class="card-content">
+          <h3 class="card-title">Muraglia Cinese</h3>
+          <p class="card-desc">
+            Accogliente chalet in legno immerso nella muraglia Cinese, che offre
+            paesaggi sereni.
+          </p>
+
+          <div class="badge-container">
+            <span class="badge">Preferito dagli ospiti</span>
+          </div>
+
+          <a href="#prenota-swiss" class="btn-reserve">Prenota Ora</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="giza.jpg" alt="Montagna" class="card-image" />
+        <div class="card-content">
+          <h3 class="card-title">Piramidi Giza</h3>
+          <p class="card-desc">
+            Vista mozzafiato sulle piramidi di Giza, con un design moderno e
+            comfort di lusso.
+          </p>
+          <div class="badge-container">
+            <span class="badge">Superhost</span>
+          </div>
+          <a href="#prenota-ocean" class="btn-reserve">Prenota Ora</a>
+        </div>
+      </article>
+    </div>
+  </body>
+</html>

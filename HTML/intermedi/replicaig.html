@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <title>Instagram Clone</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Helvetica, Arial, sans-serif;
+      }
+
+      body {
+        background-color: var(--bg-color);
+        color: var(--text-primary);
+        display: flex;
+        min-height: 100vh;
+      }
+
+      .sidebar {
+        width: 245px;
+        height: 100vh;
+        background-color: #fff;
+        border-right: 1px solid var(--border-color);
+        position: fixed;
+        top: 0;
+        left: 0;
+        padding: 40px 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+      }
+
+      .logo {
+        font-size: 24px;
+        font-weight: bold;
+        font-family: "Billabong", cursive; /* Fallback semplice */
+        margin-bottom: 20px;
+        padding-left: 10px;
+      }
+
+      .nav-item {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        font-size: 16px;
+        font-weight: 400;
+        color: var(--text-primary);
+        text-decoration: none;
+        padding: 10px;
+        border-radius: 8px;
+        transition: background 0.2s;
+      }
+
+      .nav-item:hover {
+        background-color: #f2f2f2;
+      }
+
+      .nav-item i {
+        font-size: 22px;
+      }
+
+      .main-content {
+        margin-left: 245px; /* Lascia spazio alla sidebar */
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        padding-top: 30px;
+      }
+
+      .container {
+        max-width: 935px;
+        width: 100%;
+        padding: 20px;
+      }
+
+      .profile-header {
+        display: flex;
+        margin-bottom: 44px;
+        align-items: center;
+      }
+
+      .profile-image {
+        flex: 0 0 290px;
+        display: flex;
+        justify-content: center;
+      }
+
+      .profile-image img {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 1px solid var(--border-color);
+      }
+
+      .profile-info {
+        flex: 1;
+      }
+
+      .profile-user-settings {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        margin-bottom: 20px;
+      }
+
+      .profile-user-name {
+        font-size: 20px;
+        font-weight: 400;
+      }
+
+      .btn-profile {
+        background-color: #efefef;
+        border: none;
+        border-radius: 8px;
+        padding: 7px 16px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      .profile-stats {
+        display: flex;
+        gap: 40px;
+        margin-bottom: 20px;
+        font-size: 16px;
+      }
+
+      .profile-stats li {
+        list-style: none;
+      }
+
+      .stat-count {
+        font-weight: 600;
+      }
+
+      .profile-bio {
+        font-size: 14px;
+        line-height: 1.5;
+      }
+
+      .profile-real-name {
+        font-weight: 600;
+      }
+
+      .highlights {
+        display: flex;
+        gap: 40px;
+        margin-bottom: 44px;
+        padding-bottom: 10px;
+        overflow-x: auto;
+      }
+
+      .highlight-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+      }
+
+      .highlight-circle {
+        width: 77px;
+        height: 77px;
+        border-radius: 50%;
+        border: 1px solid var(--border-color);
+        padding: 3px;
+      }
+
+      .highlight-circle img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+
+      .highlight-title {
+        font-size: 12px;
+        font-weight: 600;
+      }
+
+      /* Griglia Foto */
+      .gallery-nav {
+        border-top: 1px solid var(--border-color);
+        display: flex;
+        justify-content: center;
+        gap: 60px;
+        margin-bottom: 20px;
+      }
+
+      .gallery-tab {
+        padding-top: 15px;
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: var(--text-secondary);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .gallery-tab.active {
+        border-top: 1px solid var(--text-primary);
+        color: var(--text-primary);
+        margin-top: -1px;
+      }
+
+      .gallery {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 28px;
+      }
+
+      .gallery-item {
+        position: relative;
+        width: 100%;
+        padding-bottom: 100%;
+        overflow: hidden;
+        cursor: pointer;
+      }
+
+      .gallery-item img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      /* Hover Effect sulle foto */
+      .gallery-item:hover .gallery-item-info {
+        display: flex;
+      }
+
+      .gallery-item-info {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.3);
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        gap: 30px;
+        font-weight: bold;
+        font-size: 18px;
+      }
+
+      .gallery-item-info i {
+        margin-right: 7px;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="sidebar">
+      <div class="logo">Instagram</div>
+      <a href="#" class="nav-item"><i class="fas fa-home"></i> Home</a>
+      <a href="#" class="nav-item"><i class="fas fa-search"></i> Cerca</a>
+      <a href="#" class="nav-item"><i class="fas fa-compass"></i> Esplora</a>
+      <a href="#" class="nav-item"><i class="fas fa-film"></i> Reels</a>
+      <a href="#" class="nav-item"
+        ><i class="fas fa-paper-plane"></i> Messaggi</a
+      >
+      <a href="#" class="nav-item"><i class="fas fa-heart"></i> Notifiche</a>
+      <a href="#" class="nav-item"><i class="fas fa-plus-square"></i> Crea</a>
+      <a href="#" class="nav-item" style="font-weight: bold"
+        ><i class="fas fa-user-circle"></i> Profilo</a
+      >
+    </nav>
+
+    <main class="main-content">
+      <div class="container">
+        <header class="profile-header">
+          <div class="profile-image">
+            <img />
+          </div>
+
+          <div class="profile-info">
+            <div class="profile-user-settings">
+              <h1 class="profile-user-name">Alessio Alaimo</h1>
+              <i
+                class="fas fa-cog"
+                style="font-size: 24px; cursor: pointer"
+              ></i>
+            </div>
+
+            <ul class="profile-stats">
+              <li><span class="stat-count">9</span> post</li>
+              <li><span class="stat-count">99999</span> follower</li>
+              <li><span class="stat-count">99999</span> seguiti</li>
+            </ul>
+
+            <div class="profile-bio">
+              <span class="profile-real-name">Nome Utente</span>
+              <p>
+                Data Scientist & Developer <br />
+                Student Life<br />
+                Photography & Tech<br />
+                <a
+                  href="#"
+                  style="color: var(--link-color); text-decoration: none"
+                  >www.miosito.com</a
+                >
+              </p>
+            </div>
+          </div>
+        </header>
+
+        <div class="highlights">
+          <div class="highlight-item">
+            <div class="highlight-circle">
+              <img />
+            </div>
+            <span class="highlight-title">Tech</span>
+          </div>
+          <div class="highlight-item">
+            <div class="highlight-circle">
+              <img />
+            </div>
+            <span class="highlight-title">Nature</span>
+          </div>
+          <div class="highlight-item">
+            <div class="highlight-circle">
+              <img />
+            </div>
+            <span class="highlight-title">Relax</span>
+          </div>
+        </div>
+
+        <div class="gallery-nav">
+          <div class="gallery-tab active"><i class="fas fa-th"></i> Post</div>
+          <div class="gallery-tab"><i class="fas fa-video"></i> Reels</div>
+          <div class="gallery-tab"><i class="fas fa-user-tag"></i> Taggati</div>
+        </div>
+
+        <div class="gallery">
+          <div class="gallery-item">
+            <img />
+            <div class="gallery-item-info"></div>
+          </div>
+          <div class="gallery-item">
+            <img />
+            <div class="gallery-item-info"></div>
+          </div>
+          <div class="gallery-item">
+            <img />
+            <div class="gallery-item-info"></div>
+          </div>
+          <div class="gallery-item">
+            <img />
+            <div class="gallery-item-info"></div>
+          </div>
+          <div class="gallery-item">
+            <img />
+            <div class="gallery-item-info"></div>
+          </div>
+          <div class="gallery-item">
+            <img />
+            <div class="gallery-item-info"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,10 @@
+body {
+  font-family: Arial, sans-serif;
+  padding: 40px;
+}
+
+.star {
+  font-size: 2rem;
+  cursor: pointer;
+  color: lightgray;
+}
